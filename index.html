@@ -9,26 +9,62 @@
     <title>Test</title>
 </head>
 <body>
+    <script type="text/x-template" id="modal-template">
+      <transition name="modal">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
+              <div class="modal-header">
+                <slot name="formSlot">
+                  здесь ничего не отображается 
+                  <h3>default header</h3>
+                  <!-- здесь ничего не отображается -->
+                </slot>
+              </div>
+    
+              <div class="modal-body">
+                <slot name="formSlot-body">
+                  default body
+                </slot>
+              </div>
+    
+              <div class="modal-footer">
+                <slot name="formSlot-footer">
+                  default footer
+                  <!-- <button class="modal-default-button" @click="$emit('close')">
+                    OK
+                  </button> -->
+                </slot>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </script>
+
+
     <h1>Список пользователей</h1>
     <div id="app">
+      <div class="user__filtering">
+          <div id="filter" class="sort-box">
+              <span>Показать:</span>
+              <button type="button" class="sort-button active" @click="filterAll">всех</button>
+              <button type="button" class="sort-button" @click="filterDesign">дизайнеров</button>
+              <button type="button" class="sort-button" @click="filterDeveloper">разработчиков</button>
+              <button type="button" class="sort-button" @click="filterManager">контент-менеджеров</button>
+          </div>
+  
+          <div id="sorting" class="sort-box">
+              <span>Сортировать:</span>
+              <button type="button" class="sort-button active" @click="sortByID">по ID</button>
+              <button type="button" class="sort-button" @click="sortByName">по имени</button>
+              <button type="button" class="sort-button" @click="sortByBDate">по дате рождения</button>
+          </div>
+      </div>
 
-        <div id="filter" class="sort-box">
-            <span>Показать:</span>
-            <button type="button" class="sort-button active" @click="filterAll">всех</button>
-            <button type="button" class="sort-button" @click="filterDesign">дизайнеров</button>
-            <button type="button" class="sort-button" @click="filterDeveloper">разработчиков</button>
-            <button type="button" class="sort-button" @click="filterManager">контент-менеджеров</button>
-        </div>
-
-        <div id="sorting" class="sort-box">
-            <span>Сортировать:</span>
-            <button type="button" class="sort-button active" @click="sortByID">по ID</button>
-            <button type="button" class="sort-button" @click="sortByName">по имени</button>
-            <button type="button" class="sort-button" @click="sortByBDate">по дате рождения</button>
-        </div>
-
-        <user-component v-for="(user, index) in users" :user="user" :key="user.id" @click.native="showModal">
-                <transition name="modal" slot="user-modal">
+      <ul class="user__list">
+        <user-component v-for="(user, index) in users" :user="user" id="show-modal" @click.native="showModal = true" :key="user.id" >
+                <!-- <transition name="modal" slot="user-modal">
                     <div class="modal-mask" v-show="isModalVisible">
                     <div class="modal-wrapper">
                         <div class="modal-container">
@@ -72,9 +108,52 @@
                         </div>
                     </div>
                     </div>
-                </transition>
+                </transition> -->
         </user-component>
+      </ul>
+      <modal v-show="showModal" @close="showModal = false">
+          <!--
+            you can use custom content here to overwrite
+            default content
+          -->
+          <div slot="formSlot">
+            <h3>Редактирование данных пользователя</h3>
+          </div>
+          <div slot="formSlot-body">
+              <form name="user-form" class="user-form" action="https://api2.esetnod32.ru/frontend/test/" method="POST" >
+                <label for="user-name">Name</label>
+                <input type="text" name="user-name" id="user-name" placeholder="Имя пользователя"/>
 
+                <label for="user-phone">Номер телефона</label>
+                <input type="tel" name="user-phone" class="phone_mask" id="user-phone"  placeholder="Номер телефона">
+
+                <label for="user-birthday">Дата рождения</label>
+                <input type="text" name="user-birthday" class="mask-date" id="user-birthday"  placeholder="Дата рождения">
+                
+                <label for="user-role">Специальность</label>
+                <select name="user-role" id="user-role">
+                    <option value="Дизайнер">Дизайнер</option>
+                    <option value="Разработчик">Разработчик</option>
+                    <option value="Контент-менеджер">Контент-менеджер</option>
+                </select>
+                <div class="archive">
+                    <label for="archive"> isArhive</label>
+                    <input type="checkbox" name="archive" id="archive" />
+                </div>
+                <div class="button-box">
+                    <button type="submit" value="submit" @click="showModal = false">
+                        Сохранить
+                    </button>
+                    <button type="reset" @click="showModal = false">
+                        Отмена
+                    </button>
+                </div>
+              </form>
+          </div>
+      </modal> 
+
+
+      <div class="user__add">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Добавить</button>
         <br><br>
        
@@ -92,8 +171,7 @@
               </li>
             </ul>
           </div>
-        </div>
-        
+        </div> 
         
         <div id="modal" class="modal fade" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-sm">
@@ -118,6 +196,7 @@
           </div>
         </div>
 
+      </div>
     </div>
 
     <!-- <div id="newapp">

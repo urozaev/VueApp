@@ -7,7 +7,6 @@ html, body
   font-size: 18px
   line-height: 1.5
 
-
 h1 
   text-align: center
 
@@ -20,66 +19,72 @@ h1
   list-style: none
 
 
-#app .button 
-  margin-bottom: 20px
+  .button 
+    margin-bottom: 20px
 
 
-#app .user 
-  max-width: 500px
-  margin: 0 auto
-  padding-bottom: 15px
-  text-align: left
+  .user 
+    // max-width: 200px
+    margin: 0 auto
+    padding-bottom: 15px
+    text-align: left
+
+    &__filtering
+      padding-top: 10px
+
+    &__info 
+      margin-bottom: 0
+      border-radius: 0
+      background-color: #fff
+      border-radius: 5px
+      -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1)
+      box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1)
+      color: #4a4a4a
+      display: block
+      padding: 1.25rem
+
+    &__list
+      display: flex
+      flex-wrap: wrap
+      max-width: 80%
+      margin: 0 auto
+      list-style: none
+      padding: 30px 0 0
+
+    &:hover 
+      cursor: pointer
+
+  .content b, .content strong 
+    color: #42b983
+
+  #sorting, #filter 
+    text-align: center
+    margin-bottom: 10px
+
+  .sort-button 
+    font-size: 13px
+    background: #999
+    padding: 5px 10px
+    border-radius: 7px
+    cursor: pointer
+    border: none
+    color: #fff
 
 
-#app .user__info 
-  margin-bottom: 0
-  border-radius: 0
+  .sort-button:not(:last-of-type)  
+    margin-right: 10px
 
 
-#app .content b, #app .content strong 
-  color: #42b983
-
-#app .user__info 
-  background-color: #fff
-  border-radius: 5px
-  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1)
-  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1)
-  color: #4a4a4a
-  display: block
-  padding: 1.25rem
+  .sort-button:hover  
+    background: #888
 
 
-#sorting, #filter 
-  text-align: center
-  margin-bottom: 10px
-
-.sort-button  
-  background: #999
-  padding: 10px 14px
-  border-radius: 2px
-  cursor: pointer
-  border: none
-  color: #fff
+  .sort-button:focus, .sort-button:active  
+    background: #49b293
 
 
-.sort-button:not(:last-of-type)  
-  margin-right: 10px
-
-
-.sort-button:hover  
-  background: #888
-
-
-.sort-button:focus, .sort-button:active  
-  background: #49b293
-
-
-button.active, button.active:hover 
-  background: #49b293
-
-
-.user:hover 
-  cursor: pointer
+  button.active, button.active:hover 
+    background: #49b293
 
 
 /*Модальное окно*/

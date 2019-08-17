@@ -26,22 +26,18 @@ h1 {
 }
 
 #app .user {
-  max-width: 500px;
   margin: 0 auto;
   padding-bottom: 15px;
   text-align: left;
 }
 
+#app .user__filtering {
+  padding-top: 10px;
+}
+
 #app .user__info {
   margin-bottom: 0;
   border-radius: 0;
-}
-
-#app .content b, #app .content strong {
-  color: #42b983;
-}
-
-#app .user__info {
   background-color: #fff;
   border-radius: 5px;
   -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
@@ -51,38 +47,52 @@ h1 {
   padding: 1.25rem;
 }
 
-#sorting, #filter {
+#app .user__list {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 80%;
+  margin: 0 auto;
+  list-style: none;
+  padding: 30px 0 0;
+}
+
+#app .user:hover {
+  cursor: pointer;
+}
+
+#app .content b, #app .content strong {
+  color: #42b983;
+}
+
+#app #sorting, #app #filter {
   text-align: center;
   margin-bottom: 10px;
 }
 
-.sort-button {
+#app .sort-button {
+  font-size: 13px;
   background: #999;
-  padding: 10px 14px;
-  border-radius: 2px;
+  padding: 5px 10px;
+  border-radius: 7px;
   cursor: pointer;
   border: none;
   color: #fff;
 }
 
-.sort-button:not(:last-of-type) {
+#app .sort-button:not(:last-of-type) {
   margin-right: 10px;
 }
 
-.sort-button:hover {
+#app .sort-button:hover {
   background: #888;
 }
 
-.sort-button:focus, .sort-button:active {
+#app .sort-button:focus, #app .sort-button:active {
   background: #49b293;
 }
 
-button.active, button.active:hover {
+#app button.active, #app button.active:hover {
   background: #49b293;
-}
-
-.user:hover {
-  cursor: pointer;
 }
 
 /*Модальное окно*/
