@@ -7,7 +7,7 @@ const users = JSON.parse(request.responseText);
 
 Vue.component('user-component', {
     template: `
-      <li class="user">
+      
         <div class="user__info">
             <div class="content">
                     <span><strong>{{user.name}}</strong></span>
@@ -22,16 +22,16 @@ Vue.component('user-component', {
             
             </slot>
         </div>
-      </li>
+      
     `,
     props: {
       user: Object
     }
   });
   
-  Vue.component('modal', {
-    template: '#modal-template'
-  })
+  // Vue.component('modal', {
+  //   template: '#modal-template'
+  // })
 
   // new Vue({
   //   el: '#app',
@@ -101,7 +101,7 @@ var vm = new Vue({
 	data: function() {
     return {
     users,
-    showModal: false,
+    isModalVisible: false,
 		items: [],
 		item: {name: '',phone: ''},
     edit: false,
@@ -170,12 +170,12 @@ var vm = new Vue({
     sortByID() {
         this.users = _.sortBy(this.users, ['id']);
     },
-    // showModal: function() {
-    //     this.isModalVisible = true;
-    //   },
-    // closeModal() {
-    //     this.isModalVisible = false;
-    // }
+    showModal: function() {
+        this.isModalVisible = true;
+      },
+    closeModal() {
+        this.isModalVisible = false;
+    }
   },
   props: {
     user: Object
