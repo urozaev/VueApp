@@ -61,6 +61,29 @@ h1 {
   cursor: pointer;
 }
 
+#app .user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#app .user-form .archive {
+  display: flex;
+  align-items: center;
+}
+
+#app .user-form .archive input {
+  margin: 0 0 0 7px;
+}
+
+#app .user-form input, #app .user-form select {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+#app .user__add .row {
+  margin: 0;
+}
+
 #app .content b, #app .content strong {
   color: #42b983;
 }
@@ -152,25 +175,6 @@ h1 {
 .modal-leave-active .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
-}
-
-.user-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.user-form .archive {
-  display: flex;
-  align-items: center;
-}
-
-.user-form input, .user-form select {
-  padding: 5px;
-  margin-bottom: 10px;
-}
-
-.user-form .archive input {
-  margin: 0 0 0 7px;
 }
 
 .button-box {

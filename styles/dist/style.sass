@@ -55,6 +55,29 @@ h1
     &:hover 
       cursor: pointer
 
+      
+    &-form 
+      display: flex
+      flex-direction: column
+
+
+      .archive 
+        display: flex
+        align-items: center
+
+        input 
+          margin: 0 0 0 7px
+
+
+      input, select 
+        padding: 5px
+        margin-bottom: 10px
+
+    &__add
+      .row
+        margin: 0
+
+
   .content b, .content strong 
     color: #42b983
 
@@ -144,25 +167,6 @@ h1
 .modal-leave-active .modal-container 
   -webkit-transform: scale(1.1)
   transform: scale(1.1)
-
-
-.user-form 
-  display: flex
-  flex-direction: column
-
-
-.user-form .archive 
-  display: flex
-  align-items: center
-
-
-.user-form input, .user-form select 
-  padding: 5px
-  margin-bottom: 10px
-
-
-.user-form .archive input 
-  margin: 0 0 0 7px
 
 
 .button-box 
