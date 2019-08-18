@@ -170,8 +170,11 @@ var vm = new Vue({
     sortByID() {
         this.users = _.sortBy(this.users, ['id']);
     },
-    showModal: function() {
-        this.isModalVisible = true;
+    showModal(index) {
+      this.user = this.users[index]
+      this.isModalVisible = true
+        // this[index].isModalVisible = true;
+        // console.log(this.isModalVisible)
       },
     closeModal() {
         this.isModalVisible = false;
@@ -236,3 +239,13 @@ const setActive = el => {
 
 let active = [...document.body.querySelectorAll('.sort-button')]
 active.forEach(el => el.addEventListener('click', e => setActive(el)))
+
+let clickOn = document.body.querySelectorAll('.user')
+Array.from(clickOn).forEach(el => el.addEventListener('click', function() {
+  this.classList.toggle('go');
+}))
+// Array.from(clickOn).forEach(el => el.addEventListener('click', function(){
+//   let modalWindow = el.querySelector('.modal-mask');
+//   // modalWindow.style.display = "block";
+//   modalWindow.isModalVisible = true;
+// }))
