@@ -9,7 +9,7 @@
     <title>Test</title>
 </head>
 <body>
-    <script type="text/x-template" id="modal-template">
+    <!-- <script type="text/x-template" id="modal-template">
       <transition name="modal">
         <div class="modal-mask">
           <div class="modal-wrapper">
@@ -18,7 +18,7 @@
                 <slot name="formSlot">
                   здесь ничего не отображается 
                   <h3>default header</h3>
-                  <!-- здесь ничего не отображается -->
+                  
                 </slot>
               </div>
     
@@ -31,41 +31,24 @@
               <div class="modal-footer">
                 <slot name="formSlot-footer">
                   default footer
-                  <!-- <button class="modal-default-button" @click="$emit('close')">
-                    OK
-                  </button> -->
+
                 </slot>
               </div>
             </div>
           </div>
         </div>
       </transition>
-    </script>
+    </script> -->
 
 
     <h1>Список пользователей</h1>
     <div id="app">
-      <div class="user__filtering">
-          <div id="filter" class="sort-box">
-              <span>Показать:</span>
-              <button type="button" class="sort-button active" @click="filterAll">всех</button>
-              <button type="button" class="sort-button" @click="filterDesign">дизайнеров</button>
-              <button type="button" class="sort-button" @click="filterDeveloper">разработчиков</button>
-              <button type="button" class="sort-button" @click="filterManager">контент-менеджеров</button>
-          </div>
-  
-          <div id="sorting" class="sort-box">
-              <span>Сортировать:</span>
-              <button type="button" class="sort-button active" @click="sortByID">по ID</button>
-              <button type="button" class="sort-button" @click="sortByName">по имени</button>
-              <button type="button" class="sort-button" @click="sortByBDate">по дате рождения</button>
-          </div>
-      </div>
 
-      <ul class="user__list">
-        <li class="user" v-for="(user, index) in users" @click='showModal(index)'  :key="user.id" :index="index">
-            <user-component  :user="user">
-                <transition name="modal" slot="user-modal">
+
+      <!-- <ul class="user__list">
+        <li class="user" v-for="(user, index) in users" @click='showModal'  :key="user.id" :index="index">
+            <user-component  :user="user"> -->
+                <!-- <transition name="modal" slot="user-modal">
                     <div class="modal-mask" v-show="isModalVisible">
                     <div class="modal-wrapper">
                         <div class="modal-container">
@@ -109,10 +92,11 @@
                         </div>
                     </div>
                     </div>
-                </transition>
-            </user-component>
-        </li>
-<!-- НАПИШИ ФУНКЦИЮ КОТОРАЯ БУДЕТ ОТДЕЛЯТЬ КАЖДУЮ LI ОТ ДРУГИХ(В ЛЕКЦИИ ЕСТЬ) -->
+                </transition> -->
+            <!-- </user-component>
+        </li> -->
+
+
         <!-- <li class="user" v-for="user in users" @click="showModal = true" :key="user.id">
             <div class="user__info">
                 <div class="content">
@@ -170,12 +154,10 @@
                       </div>
                     </div>
                 </transition> -->
-                <!-- <modal v-show="showModal" @close="showModal = false"> -->
-                    <!--
-                      you can use custom content here to overwrite
-                      default content
-                    -->
-                    <!-- <div slot="formSlot">
+                
+                
+                <!-- <modal v-show="isModalVisible" @close="closeModal">
+                    <div slot="formSlot">
                       <h3>Редактирование данных пользователя</h3>
                     </div>
                     <div slot="formSlot-body">
@@ -203,21 +185,35 @@
                         </form>
                     </div>
                     <div class="button-box" slot='formSlot-footer'>
-                        <button type="submit" value="submit" @click="$emit('close')">
+                        <button type="submit" value="submit" @click="closeModal">
                             Сохранить
                         </button>
-                        <button type="reset"  @click="$emit('close')">
+                        <button type="reset"  @click="closeModal">
                             Отмена
                         </button>
                     </div>
                 </modal>  -->
-            <!-- </div>
-          </li> -->
-      </ul>
+      
+              <!-- </ul> -->
 
 
 
-
+      <div class="user__filtering">
+          <div id="filter" class="sort-box">
+              <span>Показать:</span>
+              <button type="button" class="sort-button active" @click="filterAll">всех</button>
+              <button type="button" class="sort-button" @click="filterDesign">дизайнеров</button>
+              <button type="button" class="sort-button" @click="filterDeveloper">разработчиков</button>
+              <button type="button" class="sort-button" @click="filterManager">контент-менеджеров</button>
+          </div>
+  
+          <div id="sorting" class="sort-box">
+              <span>Сортировать:</span>
+              <button type="button" class="sort-button active" @click="sortByID">по ID</button>
+              <button type="button" class="sort-button" @click="sortByName">по имени</button>
+              <button type="button" class="sort-button" @click="sortByBDate">по дате рождения</button>
+          </div>
+      </div>
 
       <div class="user__add">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Добавить</button>
@@ -226,14 +222,25 @@
         <div class="row">
           <div class="col-md-12">
             <ul class="list-group user__list">
-              <li class="list-group-item user" v-for="item in items">
-                <button type="button" class="btn btn-default" v-for="(item, index) in items" @click="removeItem(index)">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true">Remove</span></button>
-                
-                <button type="button" class="btn btn-default" v-for="(item, index) in items" @click="editItem(index)">
-                <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span></button>
-                {{item.name}}
-                {{item.phone}}
+              <li class="col-md-4 list-group-item user" v-for="(item, index) in items">
+                <div class="content">
+                      <span><strong>{{item.name}}</strong></span>
+                      <br>
+                      <span>ID: {{item.id}}</span>
+                      <br>
+                      <span>Специальность: {{item.role}}</span>
+                      <br>
+                      <span> Номер телефона: {{item.phone}}</span>
+                      <br>
+                      <span> Дата рождения: {{item.birthday}}</span>
+                </div>
+                <!-- <button type="button" class="btn btn-default"  @click="removeItem(index)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true">Remove</span>
+                </button> -->
+                    
+                <button type="button" class="btn btn-primary" @click="editItem(index)">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
+                </button>
               </li>
             </ul>
           </div>
@@ -243,7 +250,7 @@
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
               <div class="modal-body">
-                <form class="form-horizontal" @submit="addItem">
+                <form class="form-horizontal user-form" @submit="addItem" action="https://api2.esetnod32.ru/frontend/test/" method="POST">
                   <div class="form-group">
                     <label for="name" class="col-10 control-label">Имя пользователя</label>
                     <div class="col-sm-10">
@@ -251,11 +258,27 @@
                     </div>
                     <label for="phone" class="col-10 control-label">Телефон</label>
                     <div class="col-sm-10">
-                      <input type="tel" class="form-control" id="phone" class="phone_mask" placeholder="Телефон" v-model="item.phone">
+                      <input type="tel" class="form-control" id="phone" class="" placeholder="Телефон" v-model="item.phone">
+                    </div>
+                    <label for="user-birthday" class="col-10 control-label">Дата рождения</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="birthday" class="" id="birthday"  placeholder="Дата рождения" v-model="item.birthday">
+                    </div>
+                    <label for="user-role" class="col-10 control-label">Специальность</label>
+                    <div class="col-sm-10">
+                      <select name="role" id="role" v-model="item.role">
+                          <option value="designer">Дизайнер</option>
+                          <option value="developer">Разработчик</option>
+                          <option value="manager">Контент-менеджер</option>
+                      </select>
+                    </div>
+                    <label for="archive" class="col-10 control-label">В архиве</label>
+                    <div class="col-sm-10">
+                        <input type="checkbox" value="В архиве" checked name="archive" id="archive" v-model="item.isArhive" />
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary">OK</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal" v-for="(item, index) in items" @click="editCancel(index)">Отмена</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" @click="editCancel(index)">Отмена</button>
                 </form>
               </div>
             </div>
@@ -263,6 +286,7 @@
         </div>
 
       </div>
+
     </div>
 
     <!-- <div id="newapp">

@@ -29,9 +29,9 @@ Vue.component('user-component', {
     }
   });
   
-  // Vue.component('modal', {
-  //   template: '#modal-template'
-  // })
+  Vue.component('modal', {
+    template: '#modal-template'
+  })
 
   // new Vue({
   //   el: '#app',
@@ -100,10 +100,19 @@ var vm = new Vue({
 
 	data: function() {
     return {
-    users,
+    // users,
     isModalVisible: false,
-		items: [],
-		item: {name: '',phone: ''},
+		items: users,
+    // item: {name: '',phone: ''},
+    item: function(index) {
+      return {
+        name: index.name,
+        phone: index.phone,
+        birthday: index.birthday,
+        role: index.role,
+        archive: index.isArchive
+      }
+    },
     edit: false,
     editIndex:-1
     }
@@ -116,12 +125,30 @@ var vm = new Vue({
       if(!this.edit)
       {
       	this.items.push(this.item);
-				this.item = {name: '',phone: ''};
+        // this.item = {name: '',phone: ''};
+        this.item = function(index) {
+          return {
+            name: index.name,
+            phone: index.phone,
+            birthday: index.birthday,
+            role: index.role,
+            archive: index.isArchive
+          }
+        };
       } 
       else 
       {
         this.items[this.editIndex] = this.item;
-				this.item = {name: '',phone: ''};
+        // this.item = {name: '',phone: ''};
+        this.item = function(index) {
+          return {
+            name: index.name,
+            phone: index.phone,
+            birthday: index.birthday,
+            role: index.role,
+            archive: index.isArchive
+          }
+        };
         this.edit = false;
         this.editIndex = -1;
       }
@@ -138,7 +165,16 @@ var vm = new Vue({
       $('#modal').modal('show');
 		},
     editCancel: function(index){
-    	this.item = {name: '',phone: ''};
+      // this.item = {name: '',phone: ''};
+      this.item = function(index) {
+        return {
+          name: index.name,
+          phone: index.phone,
+          birthday: index.birthday,
+          role: index.role,
+          archive: index.isArchive
+        }
+      };
       this.editIndex = -1;
     },
     filterAll() {
@@ -170,11 +206,10 @@ var vm = new Vue({
     sortByID() {
         this.users = _.sortBy(this.users, ['id']);
     },
-    showModal(index) {
-      this.user = this.users[index]
+    showModal() {
+      // this.user = this.users[index]
       this.isModalVisible = true
-        // this[index].isModalVisible = true;
-        // console.log(this.isModalVisible)
+
       },
     closeModal() {
         this.isModalVisible = false;
@@ -227,6 +262,7 @@ $(function() {
 
 
 //Masks
+//С МАСКАМИ ПОЧЕМУ ТО НЕ ВЕРНО ОТОБРАЖАЮТСЯ ДАННЫЕ ЮЗЕРА ПОСЛЕ ПРАВКИ
 $(".phone_mask").mask("+7 (999) 999-99-99");
 $('.mask-date').mask('99.99.9999');
 

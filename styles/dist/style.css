@@ -50,7 +50,7 @@ h1 {
 
 #app .user__list {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   max-width: 80%;
   margin: 0 auto;
   list-style: none;
