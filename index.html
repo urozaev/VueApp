@@ -247,38 +247,38 @@
         </div> 
         
         <div id="modal" class="modal fade" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-sm">
+          <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
               <div class="modal-body">
                 <form class="form-horizontal user-form" @submit="addItem" action="https://api2.esetnod32.ru/frontend/test/" method="POST">
                   <div class="form-group">
-                    <label for="name" class="col-10 control-label">Имя пользователя</label>
-                    <div class="col-sm-10">
+                    <label for="name" class="control-label">Имя пользователя</label>
+                    <div class="col-10 form-input-box">
                       <input type="text" class="form-control" id="name" placeholder="Имя пользователя" v-model="item.name">
                     </div>
-                    <label for="phone" class="col-10 control-label">Телефон</label>
-                    <div class="col-sm-10">
-                      <input type="tel" class="form-control" id="phone" class="" placeholder="Телефон" v-model="item.phone">
+                    <label for="phone" class="control-label">Телефон</label>
+                    <div class="col-10 form-input-box">
+                      <input type="tel" class="form-control" id="phone" placeholder="Телефон" v-model="item.phone">
                     </div>
-                    <label for="user-birthday" class="col-10 control-label">Дата рождения</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="birthday" class="" id="birthday"  placeholder="Дата рождения" v-model="item.birthday">
+                    <label for="user-birthday" class="control-label">Дата рождения</label>
+                    <div class="col-10 form-input-box">
+                        <input type="text" name="birthday" class="form-control" id="birthday"  placeholder="Дата рождения" v-model="item.birthday">
                     </div>
-                    <label for="user-role" class="col-10 control-label">Специальность</label>
-                    <div class="col-sm-10">
-                      <select name="role" id="role" v-model="item.role">
+                    <label for="user-role" class="control-label">Специальность</label>
+                    <div class="col-10 form-input-box">
+                      <select name="role" id="role" class="form-control" v-model="item.role">
                           <option value="designer">Дизайнер</option>
                           <option value="developer">Разработчик</option>
                           <option value="manager">Контент-менеджер</option>
                       </select>
                     </div>
-                    <label for="archive" class="col-10 control-label">В архиве</label>
-                    <div class="col-sm-10">
+                    <div class="col-10">
+                        <label for="archive" class="control-label">В архиве</label>
                         <input type="checkbox" value="В архиве" checked name="archive" id="archive" v-model="item.isArhive" />
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary">OK</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal" @click="editCancel(index)">Отмена</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" @click="editCancel" aria-label="Close">Отмена</button>
                 </form>
               </div>
             </div>
@@ -316,7 +316,7 @@
                 <form class="form-horizontal" @submit="addItem">
                   <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Name</label>
-                    <div class="col-sm-10">
+                    <div class="col-10">
                       <input type="text" class="form-control" id="name" placeholder="name" v-model="item.name">
                     </div>
                   </div>
@@ -467,7 +467,7 @@
             <form class="form-horizontal" @submit="addItem">
               <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">Name</label>
-                <div class="col-sm-10">
+                <div class="col-10">
                   <input type="text" class="form-control" id="name" placeholder="name" v-model="item.name">
                 </div>
               </div>

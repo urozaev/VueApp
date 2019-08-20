@@ -1,3 +1,9 @@
+//Не работают маски на ДР и телефон
+//Не добавляет нового пользователя после вчерашних изменений(верни к исходнику посмотри как должно работать)
+//почитай про хуки. Загугли "добавление нового пользователя"
+//читай консоль! v-root - это написано про ошибки в index.html
+
+
 'use strict';
 //Parsing users.json
 const request = new XMLHttpRequest();
@@ -33,51 +39,6 @@ Vue.component('user-component', {
     template: '#modal-template'
   })
 
-  // new Vue({
-  //   el: '#app',
-  //   data: {
-  //     users,
-  //     isModalVisible: false,
-	// },
-  //   methods: {
-  //       filterAll() {
-  //           this.users = _.filter(users, function (item) {
-  //               return users;
-  //             })
-  //       },
-  //       filterDesign() {
-  //           this.users = _.filter(users, function (item) {
-  //               return item.role === 'designer';
-  //             })
-  //       },
-  //       filterDeveloper() {
-  //           this.users = _.filter(users, function (item) {
-  //               return item.role === 'developer';
-  //             })
-  //       },
-  //       filterManager() {
-  //           this.users = _.filter(users, function (item) {
-  //               return item.role === 'manager';
-  //             })
-  //       },
-  //       sortByName() {
-  //         this.users = _.sortBy(this.users, ['name']);
-  //       },
-  //       sortByBDate() {
-  //           this.users = _.sortBy(this.users, ['birthday']);
-  //       },
-  //       sortByID() {
-  //           this.users = _.sortBy(this.users, ['id']);
-  //       },
-  //       showModal() {
-  //           this.isModalVisible = true;
-  //         },
-  //       closeModal() {
-  //           this.isModalVisible = false;
-  //       }
-  //   }
-  // });
-
 
 
 
@@ -85,18 +46,22 @@ Vue.component('user-component', {
 var vm = new Vue({
 	el: '#app',
 
-	// mounted: function () {
+	created: function () {
 
-	// 	var items = [
-	// 		{name: 'Lorem'},
-	// 		{name: 'Ipsum'},
-  //     {name: 'Dolor'}
-	// 	];
+    var items = users;
+    var item = function(index) {
+      return {
+        name: index.name,
+        phone: index.phone,
+        birthday: index.birthday,
+        role: index.role,
+        archive: index.isArchive
+      }}
 
-	// 	this.$set('items', items);
-  //   // this.$set(this.items, 'items')
+		// this.$set('items', items);
+    this.$set(this.items, this.item)
   
-  // },
+  },
 
 	data: function() {
     return {
@@ -275,13 +240,3 @@ const setActive = el => {
 
 let active = [...document.body.querySelectorAll('.sort-button')]
 active.forEach(el => el.addEventListener('click', e => setActive(el)))
-
-let clickOn = document.body.querySelectorAll('.user')
-Array.from(clickOn).forEach(el => el.addEventListener('click', function() {
-  this.classList.toggle('go');
-}))
-// Array.from(clickOn).forEach(el => el.addEventListener('click', function(){
-//   let modalWindow = el.querySelector('.modal-mask');
-//   // modalWindow.style.display = "block";
-//   modalWindow.isModalVisible = true;
-// }))
