@@ -1,7 +1,8 @@
 //Не работают маски на ДР и телефон
-//Не добавляет нового пользователя после вчерашних изменений(верни к исходнику посмотри как должно работать)
-//почитай про хуки. Загугли "добавление нового пользователя"
-//читай консоль! v-root - это написано про ошибки в index.html
+//отправляй на сервак новых пользователей
+//requared для инпутов
+//почини фильтр
+//сортировка по дате рождения(попробуй moment)
 
 
 'use strict';
@@ -46,22 +47,16 @@ Vue.component('user-component', {
 var vm = new Vue({
 	el: '#app',
 
-	created: function () {
+	// created: function () {
 
-    var items = users;
-    var item = function(index) {
-      return {
-        name: index.name,
-        phone: index.phone,
-        birthday: index.birthday,
-        role: index.role,
-        archive: index.isArchive
-      }}
+  //   var items = users;
+  //   var item = {name: '',phone: '',birthday: '',role: '',archive: ''}
 
-		// this.$set('items', items);
-    this.$set(this.items, this.item)
+	// 	// this.$set('items', items);
+  //   this.$set(this.items, item)
+  //   // console.log(this.item)
   
-  },
+  // },
 
 	data: function() {
     return {
@@ -91,38 +86,28 @@ var vm = new Vue({
       {
       	this.items.push(this.item);
         // this.item = {name: '',phone: ''};
-        this.item = function(index) {
-          return {
-            name: index.name,
-            phone: index.phone,
-            birthday: index.birthday,
-            role: index.role,
-            archive: index.isArchive
-          }
-        };
+        this.item = {name: '',phone: '',birthday: '',role: '',archive: ''};
+        // function submitForm() {
+        //   fetch("https://api2.esetnod32.ru/frontend/test/", {
+        //     method: "POST",
+        //     body: JSON.stringify(this.item)
+        //   })
+        // }
       } 
       else 
       {
         this.items[this.editIndex] = this.item;
         // this.item = {name: '',phone: ''};
-        this.item = function(index) {
-          return {
-            name: index.name,
-            phone: index.phone,
-            birthday: index.birthday,
-            role: index.role,
-            archive: index.isArchive
-          }
-        };
+        this.item = {name: '',phone: '',birthday: '',role: '',archive: ''};
         this.edit = false;
         this.editIndex = -1;
       }
       
 			$('#modal').modal('hide');
 		},
-		removeItem: function(index) {
-			this.items.$remove(index);
-		},
+		// removeItem: function(index) {
+		// 	this.items.$remove(index);
+		// },
 		editItem: function(index) {
     	this.edit = true;
       this.editIndex = index;
@@ -143,42 +128,55 @@ var vm = new Vue({
       this.editIndex = -1;
     },
     filterAll() {
-      this.users = _.filter(users, function (item) {
+      this.items = _.filter(users, function (item) {
           return users;
         })
     },
     filterDesign() {
-        this.users = _.filter(users, function (item) {
-            return item.role === 'designer';
-          })
+      this.items = _.filter(users, function (item) {
+        return item.role === 'designer';
+      })
     },
     filterDeveloper() {
-        this.users = _.filter(users, function (item) {
+        this.items = _.filter(users, function (item) {
             return item.role === 'developer';
           })
     },
     filterManager() {
-        this.users = _.filter(users, function (item) {
+        this.items = _.filter(users, function (item) {
             return item.role === 'manager';
           })
     },
     sortByName() {
-      this.users = _.sortBy(this.users, ['name']);
+      this.items = _.sortBy(this.items, ['name']);
     },
     sortByBDate() {
-        this.users = _.sortBy(this.users, ['birthday']);
+      // this.items = _.sortBy(this.items, function(e) {
+      //   return new Date(e.birthday);
+      // });
+          // this.items.sort(function(a, b) {
+          //   let dateA = new Date(a.birthday);
+          //   let dateB = new Date(b.birthday);
+          //   console.log(dateA)
+          //   return dateA - dateB;
+          // });
+        // function formatDate(date) {
+         
+        this.items = function(a) {
+          console.log(a)
+          return Intl.DateTimeFormat('ru').format(a.birthday);
+        }  
+        // }
     },
     sortByID() {
-        this.users = _.sortBy(this.users, ['id']);
+        this.items = _.sortBy(this.items, ['id']);
     },
-    showModal() {
-      // this.user = this.users[index]
-      this.isModalVisible = true
-
-      },
-    closeModal() {
-        this.isModalVisible = false;
-    }
+    // submitForm: function() {
+    //   fetch("https://api2.esetnod32.ru/frontend/test/", {
+    //     method: "POST",
+    //     body: JSON.stringify(this.item)
+    //   })
+    // }
   },
   props: {
     user: Object
