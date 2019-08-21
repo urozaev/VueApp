@@ -43,161 +43,6 @@
 
     <h1>Список пользователей</h1>
     <div id="app">
-
-
-      <!-- <ul class="user__list">
-        <li class="user" v-for="(user, index) in users" @click='showModal'  :key="user.id" :index="index">
-            <user-component  :user="user"> -->
-                <!-- <transition name="modal" slot="user-modal">
-                    <div class="modal-mask" v-show="isModalVisible">
-                    <div class="modal-wrapper">
-                        <div class="modal-container">
-                            <slot name="modal-header">
-                            <h3 slot="modal-header" class="modal-header">Редактирование данных пользователя</h3>
-                            </slot>
-                            <slot name="modal-body">
-                                <div slot="modal-body" class="modal-body">
-                                    <form name="user-form" class="user-form" action="https://api2.esetnod32.ru/frontend/test/" method="POST" >
-
-                                        <label for="user-name">Name</label>
-                                        <input type="text" name="user-name" id="user-name" placeholder="Имя пользователя"/>
-
-                                        <label for="user-phone">Номер телефона</label>
-                                        <input type="tel" name="user-phone" class="phone_mask" id="user-phone"  placeholder="Номер телефона">
-
-                                        <label for="user-birthday">Дата рождения</label>
-                                        <input type="text" name="user-birthday" class="mask-date" id="user-birthday"  placeholder="Дата рождения">
-                                        
-                                        <label for="user-role">Специальность</label>
-                                        <select name="user-role" id="user-role">
-                                            <option value="Дизайнер">Дизайнер</option>
-                                            <option value="Разработчик">Разработчик</option>
-                                            <option value="Контент-менеджер">Контент-менеджер</option>
-                                        </select>
-                                        <div class="archive">
-                                            <label for="archive"> isArhive</label>
-                                            <input type="checkbox" name="archive" id="archive" />
-                                        </div>
-                                        <div class="button-box">
-                                            <button type="submit" value="submit">
-                                                Сохранить
-                                            </button>
-                                            <button type="reset" @close="closeModal" @click="isModalVisible = false">
-                                                Отмена
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </slot>
-                        </div>
-                    </div>
-                    </div>
-                </transition> -->
-            <!-- </user-component>
-        </li> -->
-
-
-        <!-- <li class="user" v-for="user in users" @click="showModal = true" :key="user.id">
-            <div class="user__info">
-                <div class="content">
-                      <span><strong>{{user.name}}</strong></span>
-                      <br>
-                      <span>ID: {{user.id}}</span>
-                      <br>
-                      <span>Специальность: {{user.role}}</span>
-                      <br>
-                      <span> Номер телефона: {{user.phone}}</span>
-                </div> -->
-                
-                <!-- <transition name="modal">
-                    <div class="modal-mask" v-show="isModalVisible" @close="isModalVisible = false">
-                      <div class="modal-wrapper">
-                          <div class="modal-container">
-                              <slot name="modal-header">
-                              <h3 slot="modal-header" class="modal-header">Редактирование данных пользователя</h3>
-                              </slot>
-                              <slot name="modal-body">
-                                  <div slot="modal-body" class="modal-body">
-                                      <form name="user-form" class="user-form" action="https://api2.esetnod32.ru/frontend/test/" method="POST" >
-  
-                                          <label for="user-name">Name</label>
-                                          <input type="text" name="user-name" id="user-name" placeholder="Имя пользователя"/>
-  
-                                          <label for="user-phone">Номер телефона</label>
-                                          <input type="tel" name="user-phone" class="phone_mask" id="user-phone"  placeholder="Номер телефона">
-  
-                                          <label for="user-birthday">Дата рождения</label>
-                                          <input type="text" name="user-birthday" class="mask-date" id="user-birthday"  placeholder="Дата рождения">
-                                          
-                                          <label for="user-role">Специальность</label>
-                                          <select name="user-role" id="user-role">
-                                              <option value="Дизайнер">Дизайнер</option>
-                                              <option value="Разработчик">Разработчик</option>
-                                              <option value="Контент-менеджер">Контент-менеджер</option>
-                                          </select>
-                                          <div class="archive">
-                                              <label for="archive"> isArhive</label>
-                                              <input type="checkbox" name="archive" id="archive" />
-                                          </div>
-                                          <div class="button-box">
-                                              <button type="submit" value="submit">
-                                                  Сохранить
-                                              </button>
-                                              <button type="reset" @close="closeModal" @click="$emit('close')">
-                                                  Отмена
-                                              </button>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </slot>
-                          </div>
-                      </div>
-                    </div>
-                </transition> -->
-                
-                
-                <!-- <modal v-show="isModalVisible" @close="closeModal">
-                    <div slot="formSlot">
-                      <h3>Редактирование данных пользователя</h3>
-                    </div>
-                    <div slot="formSlot-body">
-                        <form name="user-form" class="user-form" action="https://api2.esetnod32.ru/frontend/test/" method="POST" >
-                          <label for="user-name">Name</label>
-                          <input type="text" name="user-name" id="user-name" placeholder="Имя пользователя"/>
-          
-                          <label for="user-phone">Номер телефона</label>
-                          <input type="tel" name="user-phone" class="phone_mask" id="user-phone"  placeholder="Номер телефона">
-          
-                          <label for="user-birthday">Дата рождения</label>
-                          <input type="text" name="user-birthday" class="mask-date" id="user-birthday"  placeholder="Дата рождения">
-                          
-                          <label for="user-role">Специальность</label>
-                          <select name="user-role" id="user-role">
-                              <option value="Дизайнер">Дизайнер</option>
-                              <option value="Разработчик">Разработчик</option>
-                              <option value="Контент-менеджер">Контент-менеджер</option>
-                          </select>
-                          <div class="archive">
-                              <label for="archive"> isArhive</label>
-                              <input type="checkbox" name="archive" id="archive" />
-                          </div>
-
-                        </form>
-                    </div>
-                    <div class="button-box" slot='formSlot-footer'>
-                        <button type="submit" value="submit" @click="closeModal">
-                            Сохранить
-                        </button>
-                        <button type="reset"  @click="closeModal">
-                            Отмена
-                        </button>
-                    </div>
-                </modal>  -->
-      
-              <!-- </ul> -->
-
-
-
       <div class="user__filtering">
           <div id="filter" class="sort-box">
               <span>Показать:</span>
@@ -250,19 +95,19 @@
           <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
               <div class="modal-body">
-                <form class="form-horizontal user-form" @submit="addItem" action="https://api2.esetnod32.ru/frontend/test/" method="POST">
+                <form id="userForm" class="form-horizontal user-form" @submit="addItem" action="https://api2.esetnod32.ru/frontend/test/" method="POST">
                   <div class="form-group">
                     <label for="name" class="control-label">Имя пользователя</label>
                     <div class="col-10 form-input-box">
-                      <input type="text" class="form-control" id="name" placeholder="Имя пользователя" v-model="item.name">
+                      <input type="text" class="form-control" id="name" placeholder="Имя пользователя" v-model="item.name" required>
                     </div>
                     <label for="phone" class="control-label">Телефон</label>
                     <div class="col-10 form-input-box">
-                      <input type="tel" class="form-control" id="phone" placeholder="Телефон" v-model="item.phone">
+                      <input type="tel" class="form-control" id="phone" placeholder="Телефон" v-model="item.phone" required>
                     </div>
                     <label for="user-birthday" class="control-label">Дата рождения</label>
                     <div class="col-10 form-input-box">
-                        <input type="text" name="birthday" class="form-control" id="birthday"  placeholder="Дата рождения" v-model="item.birthday">
+                        <input type="text" name="birthday" class="form-control" id="birthday"  placeholder="Дата рождения" v-model="item.birthday" required>
                     </div>
                     <label for="user-role" class="control-label">Специальность</label>
                     <div class="col-10 form-input-box">

@@ -1,23 +1,28 @@
 //Не работают маски на ДР и телефон
 //отправляй на сервак новых пользователей
-//requared для инпутов
-//почини фильтр
 //сортировка по дате рождения(попробуй moment)
 
 
 'use strict';
-//Parsing users.json
-const request = new XMLHttpRequest();
-request.open("GET", "https://urozaev.github.io/showTest/users.json", false);
-request.send();
-const users = JSON.parse(request.responseText);
 
-fetch('https://urozaev.github.io/showTest/users.json')
-  .then(function(response) {
-    console.log(response.json());
+const users = []
+const userForm = document.getElementById('userForm');
+
+fetch('https://urozaev.github.io/showTest/users.json').then(
+  successResponse => {
+    if (successResponse.status != 200) {
+      return null;
+    } else {
+      return successResponse.json();
+    }
+  },
+  failResponse => {
+    return null;
   })
-  .then(function(myJson) {
-    console.log(JSON.stringify(myJson));
+  .then(function(json) {
+    json.forEach(element => {
+      users.push(element)
+    });
   });
 
 Vue.component('user-component', { 
@@ -48,39 +53,23 @@ Vue.component('user-component', {
     template: '#modal-template'
   })
 
-
-
-
-//working code
 var vm = new Vue({
 	el: '#app',
-
-	// created: function () {
-
-  //   var items = users;
-  //   var item = {name: '',phone: '',birthday: '',role: '',archive: ''}
-
-	// 	// this.$set('items', items);
-  //   this.$set(this.items, item)
-  //   // console.log(this.item)
-  
-  // },
-
 	data: function() {
     return {
     // users,
     isModalVisible: false,
 		items: users,
-    // item: {name: '',phone: ''},
-    item: function(index) {
-      return {
-        name: index.name,
-        phone: index.phone,
-        birthday: index.birthday,
-        role: index.role,
-        archive: index.isArchive
-      }
-    },
+    item: {name: '',phone: '',birthday: '',role: '',archive: ''},
+    // item: function(index) {
+    //   return {
+    //     name: index.name,
+    //     phone: index.phone,
+    //     birthday: index.birthday,
+    //     role: index.role,
+    //     archive: index.isArchive
+    //   }
+    // },
     edit: false,
     editIndex:-1
     }
@@ -88,28 +77,46 @@ var vm = new Vue({
 
 	methods: {
 		addItem: function(e) {
-			e.preventDefault();
+			// e.preventDefault();
       
       if(!this.edit)
-      {
-      	this.items.push(this.item);
-        // this.item = {name: '',phone: ''};
-        this.item = {name: '',phone: '',birthday: '',role: '',archive: ''};
-        // function submitForm() {
-        //   fetch("https://api2.esetnod32.ru/frontend/test/", {
-        //     method: "POST",
-        //     body: JSON.stringify(this.item)
-        //   })
-        // }
-      } 
+        {
+          this.items.push(this.item);
+          // this.item = {name: '',phone: ''};
+          this.item = {name: '',phone: '',birthday: '',role: '',archive: ''};
+          // function submitForm() {
+          //   fetch("https://api2.esetnod32.ru/frontend/test/", {
+          //     method: "POST",
+          //     body: JSON.stringify(this.item)
+          //   })
+          // }
+          // fetch('https://urozaev.github.io/showTest/users.json', {
+          //   method: 'POST', // или 'PUT'
+          //   body: JSON.stringify('kjhj'), // data может быть типа `string` или {object}!
+          //   headers:{'Content-Type': 'application/json; charset=utf-8'}
+          // })
+          userForm.addEventListener('submit', (e) => {
+              // e.preventDefault();
+            console.log(formData)
+            
+            fetch('https://api2.esetnod32.ru/frontend/test/', {
+              method: 'POST',
+              body: new FormData(userForm)
+            })
+            .then(response => response.json())
+            .then((response) => {
+              console.log(response);
+            })
+          });
+        } 
       else 
-      {
-        this.items[this.editIndex] = this.item;
-        // this.item = {name: '',phone: ''};
-        this.item = {name: '',phone: '',birthday: '',role: '',archive: ''};
-        this.edit = false;
-        this.editIndex = -1;
-      }
+        {
+          this.items[this.editIndex] = this.item;
+          // this.item = {name: '',phone: ''};
+          this.item = {name: '',phone: '',birthday: '',role: '',archive: ''};
+          this.edit = false;
+          this.editIndex = -1;
+        }
       
 			$('#modal').modal('hide');
 		},
@@ -124,15 +131,7 @@ var vm = new Vue({
 		},
     editCancel: function(index){
       // this.item = {name: '',phone: ''};
-      this.item = function(index) {
-        return {
-          name: index.name,
-          phone: index.phone,
-          birthday: index.birthday,
-          role: index.role,
-          archive: index.isArchive
-        }
-      };
+      this.item = {name: '',phone: '',birthday: '',role: '',archive: ''};
       this.editIndex = -1;
     },
     filterAll() {
@@ -159,6 +158,7 @@ var vm = new Vue({
       this.items = _.sortBy(this.items, ['name']);
     },
     sortByBDate() {
+      this.items = _.sortBy(this.items, ['birthday']);
       // this.items = _.sortBy(this.items, function(e) {
       //   return new Date(e.birthday);
       // });
@@ -170,10 +170,10 @@ var vm = new Vue({
           // });
         // function formatDate(date) {
          
-        this.items = function(a) {
-          console.log(a)
-          return Intl.DateTimeFormat('ru').format(a.birthday);
-        }  
+        // this.items = function(a) {
+        //   console.log(a)
+        //   return Intl.DateTimeFormat('ru').format(a.birthday);
+        // }  
         // }
     },
     sortByID() {
