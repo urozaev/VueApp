@@ -77,7 +77,7 @@ var vm = new Vue({
 
 	methods: {
 		addItem: function(e) {
-			// e.preventDefault();
+			e.preventDefault();
       
       if(!this.edit)
         {
@@ -95,19 +95,18 @@ var vm = new Vue({
           //   body: JSON.stringify('kjhj'), // data может быть типа `string` или {object}!
           //   headers:{'Content-Type': 'application/json; charset=utf-8'}
           // })
-          userForm.addEventListener('submit', (e) => {
-              // e.preventDefault();
-            console.log(formData)
-            
-            fetch('https://api2.esetnod32.ru/frontend/test/', {
-              method: 'POST',
-              body: new FormData(userForm)
-            })
-            .then(response => response.json())
-            .then((response) => {
-              console.log(response);
-            })
-          });
+          // userForm.onsubmit = async (e) => {
+          //   e.preventDefault();
+        
+          //   let response = await fetch('https://api2.esetnod32.ru/frontend/test/', {
+          //     method: 'POST',
+          //     body: new FormData(userForm)
+          //   });
+        
+          //   let result = await response.json();
+        
+          //   alert(result.message);
+          // };
         } 
       else 
         {
@@ -117,6 +116,22 @@ var vm = new Vue({
           this.edit = false;
           this.editIndex = -1;
         }
+
+          fetch('https://api2.esetnod32.ru/frontend/test/', {
+            body: new FormData(userForm),
+            credentials: 'same-origin',
+            method: 'POST'
+          })
+          .then((res) => {
+            if(200 <= res.status && res.status < 300) {
+              return res;
+            }
+            throw new Error(response.statusText);
+          })
+          .then((res) => { return res.json()})
+          .then((data) => {console.log(data)})
+          .catch((error) => {console.log(error)})
+          
       
 			$('#modal').modal('hide');
 		},
@@ -130,7 +145,6 @@ var vm = new Vue({
       $('#modal').modal('show');
 		},
     editCancel: function(index){
-      // this.item = {name: '',phone: ''};
       this.item = {name: '',phone: '',birthday: '',role: '',archive: ''};
       this.editIndex = -1;
     },
@@ -179,12 +193,6 @@ var vm = new Vue({
     sortByID() {
         this.items = _.sortBy(this.items, ['id']);
     },
-    // submitForm: function() {
-    //   fetch("https://api2.esetnod32.ru/frontend/test/", {
-    //     method: "POST",
-    //     body: JSON.stringify(this.item)
-    //   })
-    // }
   },
   props: {
     user: Object
@@ -193,49 +201,46 @@ var vm = new Vue({
 
 
 
-$(function() {
-  var button = $("button");
-  var name = $("input[name=name]");
+// $(function() {
+//   var button = $("button");
+//   var name = $("input[name=name]");
 
-  name.keyup(function() {
-    if (name.val().length > 0) {
-      button.addClass('active');
-    } else {
-      button.removeClass('active');
-    }
-  });
+//   name.keyup(function() {
+//     if (name.val().length > 0) {
+//       button.addClass('active');
+//     } else {
+//       button.removeClass('active');
+//     }
+//   });
 
-  $("form").submit(function(event) {
-    event.preventDefault();
+//   $("form").submit(function(event) {
+//     event.preventDefault();
 
-    //get the form data
-    const formData = {
-      name: $("#user-name").val(),
-      email: $("#user-phone").val(),
-      caps: $("#user-birthday").val()
-    };
+//     //get the form data
+//     const formData = {
+//       name: $("#user-name").val(),
+//       email: $("#user-phone").val(),
+//       caps: $("#user-birthday").val()
+//     };
 
-    // process the form
-    $.ajax({
-      type: "POST",
-      url: "https://api2.esetnod32.ru/frontend/test/",
-      data: formData,
-      dataType: "json",
-      encode: true
-    }).done(function(data) {
-      $(".response")
-        .empty()
-        .append(JSON.stringify(data, null, 2));
-    });
-  });
-});
+//     // process the form
+//     $.ajax({
+//       type: "POST",
+//       url: "https://api2.esetnod32.ru/frontend/test/",
+//       data: formData,
+//       dataType: "json",
+//       encode: true
+//     }).done(function(data) {
+//       $(".response")
+//         .empty()
+//         .append(JSON.stringify(data, null, 2));
+//     });
+//   });
+// });
 
 
 
-//Masks
-//С МАСКАМИ ПОЧЕМУ ТО НЕ ВЕРНО ОТОБРАЖАЮТСЯ ДАННЫЕ ЮЗЕРА ПОСЛЕ ПРАВКИ
-$(".phone_mask").mask("+7 (999) 999-99-99");
-$('.mask-date').mask('99.99.9999');
+
 
 
 //Active elements
@@ -246,3 +251,8 @@ const setActive = el => {
 
 let active = [...document.body.querySelectorAll('.sort-button')]
 active.forEach(el => el.addEventListener('click', e => setActive(el)))
+
+//Masks
+//С МАСКАМИ ПОЧЕМУ ТО НЕ ВЕРНО ОТОБРАЖАЮТСЯ ДАННЫЕ ЮЗЕРА ПОСЛЕ ПРАВКИ
+$(".phone_mask").mask("+7 (999) 999-99-99");
+$('.mask-date').mask('99.99.9999');
