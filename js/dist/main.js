@@ -12,7 +12,15 @@ request.open("GET", "https://urozaev.github.io/showTest/users.json", false);
 request.send();
 const users = JSON.parse(request.responseText);
 
-Vue.component('user-component', {
+fetch('https://urozaev.github.io/showTest/users.json')
+  .then(function(response) {
+    console.log(response.json());
+  })
+  .then(function(myJson) {
+    console.log(JSON.stringify(myJson));
+  });
+
+Vue.component('user-component', { 
     template: `
       
         <div class="user__info">

@@ -11,7 +11,7 @@ h1
   text-align: center
 
 
-#app 
+#app  
   height: 100%
   padding: 0
   margin: 0
@@ -29,6 +29,8 @@ h1
     margin: 0 auto
     padding-bottom: 15px
     text-align: left
+    display: flex
+    flex-direction: column
 
     &__filtering
       padding-top: 10px
@@ -71,17 +73,23 @@ h1
         input 
           margin-bottom: 0
 
-
-
-
     &__add
       .row
         margin: 0
+
+    &__edit-btn
+      height: 40px
+      margin-top: 20px
+      background-color: #49b293
+
+  .user:nth-last-child(1), .user:nth-last-child(2)
+    margin: 0
 
 
   .content b, .content strong 
     color: #42b983
 
+  
   #sorting, #filter 
     text-align: center
     margin-bottom: 10px
