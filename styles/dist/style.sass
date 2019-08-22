@@ -73,10 +73,6 @@ h1
         input 
           margin-bottom: 0
 
-    &__add
-      .row
-        margin: 0
-
     &__edit-btn
       height: 40px
       margin-top: 20px
@@ -85,6 +81,12 @@ h1
   .user:nth-last-child(1), .user:nth-last-child(2)
     margin: 0
 
+  .row
+    margin: 0
+    justify-content: center
+
+  .add-button
+    margin-top: 10px
 
   .content b, .content strong 
     color: #42b983
@@ -185,3 +187,16 @@ h1
 
 .form-input-box
   margin: 0 auto
+
+@media screen and ( max-width: 500px )
+  h1
+    font-size: 1.5rem
+
+  #filter, #sorting
+    display: flex
+    flex-direction: column
+
+    .sort-button:not(:last-of-type), .sort-button
+      margin-right: 0
+      border-radius: 0
+  

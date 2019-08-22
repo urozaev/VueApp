@@ -44,50 +44,45 @@
     <h1>Список пользователей</h1>
     <div id="app">
       <div class="user__filtering">
-          <div id="filter" class="sort-box">
+          <div id="filter">
               <span>Показать:</span>
-              <button type="button" class="sort-button active" @click="filterAll">всех</button>
-              <button type="button" class="sort-button" @click="filterDesign">дизайнеров</button>
-              <button type="button" class="sort-button" @click="filterDeveloper">разработчиков</button>
-              <button type="button" class="sort-button" @click="filterManager">контент-менеджеров</button>
+              <button type="button" class="sort-button active" @click="filterAll"><span>всех</span></button>
+              <button type="button" class="sort-button" @click="filterDesign"><span>дизайнеров</span></button>
+              <button type="button" class="sort-button" @click="filterDeveloper"><span>разработчиков</span></button>
+              <button type="button" class="sort-button" @click="filterManager"><span>контент-менеджеров</span></button>
           </div>
-  
-          <div id="sorting" class="sort-box">
+          <div id="sorting">
               <span>Сортировать:</span>
-              <button type="button" class="sort-button active" @click="sortByID">по ID</button>
-              <button type="button" class="sort-button" @click="sortByName">по имени</button>
-              <button type="button" class="sort-button" @click="sortByBDate">по дате рождения</button>
+              <button type="button" class="sort-button active" @click="sortByID"><span>по ID</span></button>
+              <button type="button" class="sort-button" @click="sortByName"><span>по имени</span></button>
+              <button type="button" class="sort-button" @click="sortByBDate"><span>по дате рождения</span></button>
           </div>
       </div>
-
-      <div class="user__add">
-        <br>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Добавить</button>
-        <br>
        
-        <div class="row">
-          <div class="col-md-12">
-            <ul class="list-group user__list">
-              <li class="col-md-4 list-group-item user" v-for="(item, index) in items">
-                <div class="content">
-                      <span><strong>{{item.name}}</strong></span>
-                      <br>
-                      <span>ID: {{item.id}}</span>
-                      <br>
-                      <span>Специальность: {{item.role}}</span>
-                      <br>
-                      <span> Номер телефона: {{item.phone}}</span>
-                      <br>
-                      <span> Дата рождения: {{item.birthday}}</span>
-                </div>
-                    
-                <button type="button" class="user__edit-btn btn btn-primary" @click="editItem(index)">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div> 
+      <div class="row">
+        <button type="button" class="btn btn-primary add-button" data-toggle="modal" data-target="#modal"><span>Добавить</span></button>
+        <div class="col-md-12">
+          <ul class="list-group user__list">
+            <li class="col-md-4 list-group-item user" v-for="(item, index) in items">
+              <div class="content">
+                    <span><strong>{{item.name}}</strong></span>
+                    <br>
+                    <span>ID: {{item.id}}</span>
+                    <br>
+                    <span>Специальность:<br>{{item.role}}</span>
+                    <br>
+                    <span> Номер телефона:<br>{{item.phone}}</span>
+                    <br>
+                    <span> Дата рождения:<br>{{item.birthday}}</span>
+              </div>
+                  
+              <button type="button" class="user__edit-btn btn btn-primary" @click="editItem(index)">
+                  <span aria-hidden="true">Edit</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div> 
         
         <div id="modal" class="modal fade" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-dialog-centered modal-md">
@@ -101,11 +96,11 @@
                     </div>
                     <label for="phone" class="control-label">Телефон</label>
                     <div class="col-10 form-input-box">
-                      <input type="tel" class="form-control" id="phone" ref="field" placeholder="Телефон" v-model="item.phone" required>{{item.phone}}
+                      <input type="tel" class="form-control" id="phone" ref="field" placeholder="Телефон" v-model="item.phone" required>
                     </div>
                     <label for="user-birthday" class="control-label">Дата рождения</label>
                     <div class="col-10 form-input-box">
-                        <input type="text" name="birthday" class="form-control" id="birthday"  placeholder="Дата рождения" v-model="item.birthday" required>
+                        <input type="text" name="birthday" class="form-control" id="birthday" ref="datemask"  placeholder="Дата рождения" v-model="item.birthday" required>
                     </div>
                     <label for="user-role" class="control-label">Специальность</label>
                     <div class="col-10 form-input-box">
@@ -120,15 +115,15 @@
                         <input type="checkbox" value="В архиве" name="archive" id="archive" v-model="item.isArhive" />
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary">OK</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal" @click="editCancel" aria-label="Close">Отмена</button>
+                  <button type="submit" class="btn btn-primary"><span>OK</span></button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" @click="editCancel" aria-label="Close"><span>Отмена</span></button>
                 </form>
               </div>
             </div>
           </div>
         </div>
 
-      </div>
+      
 
     </div>
 
