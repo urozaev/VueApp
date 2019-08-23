@@ -9,38 +9,7 @@
     <title>Test</title>
 </head>
 <body>
-    <!-- <script type="text/x-template" id="modal-template">
-      <transition name="modal">
-        <div class="modal-mask">
-          <div class="modal-wrapper">
-            <div class="modal-container">
-              <div class="modal-header">
-                <slot name="formSlot">
-                  здесь ничего не отображается 
-                  <h3>default header</h3>
-                  
-                </slot>
-              </div>
-    
-              <div class="modal-body">
-                <slot name="formSlot-body">
-                  default body
-                </slot>
-              </div>
-    
-              <div class="modal-footer">
-                <slot name="formSlot-footer">
-                  default footer
-
-                </slot>
-              </div>
-            </div>
-          </div>
-        </div>
-      </transition>
-    </script> -->
-
-
+   
     <h1>Список пользователей</h1>
     <div id="app">
       <div class="user__filtering">
@@ -63,7 +32,7 @@
         <button type="button" class="btn btn-primary add-button" data-toggle="modal" data-target="#modal"><span>Добавить</span></button>
         <div class="col-md-12">
           <ul class="list-group user__list">
-            <li class="col-md-4 list-group-item user" v-for="(item, index) in items">
+            <li class="col-md-4 list-group-item user" v-for="(item, index) in items" :key='index'>
               <div class="content">
                     <span><strong>{{item.name}}</strong></span>
                     <br>
@@ -72,8 +41,6 @@
                     <span>Специальность:<br>{{item.role}}</span>
                     <br>
                     <span> Номер телефона:<br>{{item.phone}}</span>
-                    <br>
-                    <span> Дата рождения:<br>{{item.birthday}}</span>
               </div>
                   
               <button type="button" class="user__edit-btn btn btn-primary" @click="editItem(index)">
@@ -88,7 +55,7 @@
           <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
               <div class="modal-body">
-                <form id="userForm" class="form-horizontal user-form" @submit="addItem" action="https://api2.esetnod32.ru/frontend/test/" method="POST">
+                <form id="userForm" class="form-horizontal user-form" @submit="addItem" action="http://localhost:3000/users" method="POST">
                   <div class="form-group">
                     <label for="name" class="control-label">Имя пользователя</label>
                     <div class="col-10 form-input-box">
