@@ -44,7 +44,7 @@
               </div>
                   
               <button type="button" class="user__edit-btn btn btn-primary" @click="editItem(index)">
-                  <span aria-hidden="true">Edit</span>
+                  <span aria-hidden="true">Изменить</span>
               </button>
             </li>
           </ul>
@@ -82,8 +82,10 @@
                         <input type="checkbox" value="В архиве" name="archive" id="archive" v-model="item.isArhive" />
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary"><span>OK</span></button>
+                  <button type="submit" class="btn btn-primary" @click="updateUser"><span>OK</span></button>
                   <button type="button" class="btn btn-default" data-dismiss="modal" @click="editCancel" aria-label="Close"><span>Отмена</span></button>
+                  <br>
+                  <button type="submit" class="user__remove-btn btn btn-primary" @click="removeUser"><span aria-hidden="true">Удалить</span></button>
                 </form>
               </div>
             </div>

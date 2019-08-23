@@ -1,8 +1,3 @@
-//при добавлении маски не обновляются реактивно данные(связать v-model маски с действующим)
-//редактирование данных на сервере
-//сортировка по дате рождения
-//разбить код на модули
-
 'use strict';
 
 const users = []
@@ -90,35 +85,51 @@ const vm = new Vue({
 
       $('#modal').modal('show');
     },
-    // updateUser: function(index){
-    //   e.preventDefault();
-    //   fetch('http://localhost:3000/users', {
-    //       method: 'PATCH',
-    //       credentials: 'include',
-    //       headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json',
-    //         'API-Key': 'secret'
-    //       },
-    //       body: JSON.stringify(this.item),
-    //     })
-    //     .then((res) => {
-    //       if(200 <= res.status && res.status < 300) {
-    //         return res;
-    //       }
-    //       throw new Error(response.statusText);
-    //     })
-    //     .then((response) => {
-    //       return response.json()
-    //     })
-    //     // .then((newUser) => {
-    //     //   users.push(newUser)
-    //     // })
-    //     .then(() => {
-    //       console.log('Данные пользователя изменены');
-    //     })
-    //     .catch((error) => {console.log(error)})
-    // },
+    updateUser: function(){
+      let url = `http://localhost:3000/users/${this.item.id}`
+      fetch(url, {
+          method: 'PATCH',
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'API-Key': 'secret'
+          },
+          body: JSON.stringify(this.item),
+        })
+        .then((res) => {
+          if(200 <= res.status && res.status < 300) {
+            return res;
+          }
+          throw new Error(response.statusText);
+        })
+        .then((response) => {
+          return response.json()
+        })
+        .then(() => {
+          console.log('Данные пользователя изменены');
+        })
+        .catch((error) => {console.log(error)})
+    },
+    removeUser: function(){
+      let url = `http://localhost:3000/users/${this.item.id}`
+      fetch(url, {
+        method: 'DELETE'
+      })
+      .then((res) => {
+        if(200 <= res.status && res.status < 300) {
+          return res;
+        }
+        throw new Error(response.statusText);
+      })
+      .then((response) => {
+        return response.json()
+      })
+      .then(() => {
+        console.log('Пользователь удалён');
+      })
+      .catch((error) => {console.log(error)})
+    },
     editCancel: function(index){
       this.item = {name: '',phone: '',birthday: '',role: '',archive: ''};
       this.editIndex = -1;
@@ -159,7 +170,7 @@ const vm = new Vue({
 });
 
 //Active elements
-const setActive = el => {
+let setActive = el => {
   [...el.parentElement.children].forEach(sib => sib.classList.remove('active'))
   el.classList.add('active')
 }
