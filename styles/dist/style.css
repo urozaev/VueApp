@@ -139,13 +139,13 @@ h1 {
   background: #49b293;
 }
 
-.button-box {
+#app .button-box {
   padding-top: 20px;
   width: 100%;
   text-align: center;
 }
 
-.form-input-box {
+#app .form-input-box {
   margin: 0 auto;
 }
 

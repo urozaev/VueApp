@@ -9,7 +9,6 @@
     <title>Test</title>
 </head>
 <body>
-   
     <h1>Список пользователей</h1>
     <div id="app">
       <div class="user__filtering">
@@ -91,50 +90,7 @@
             </div>
           </div>
         </div>
-
-      
-
     </div>
-
-    <!-- <div id="newapp">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Добавить</button>
-        <br><br>
-       
-        <div class="row">
-          <div class="col-md-12">
-            <ul class="list-group">
-              <li class="list-group-item" v-for="item in items">
-                <button type="button" class="btn btn-default" v-for="(item, index) in items" @click="removeItem(index)">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true">Remove</span></button>
-                
-                <button type="button" class="btn btn-default" v-for="(item, index) in items" @click="editItem(index)">
-                <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span></button>
-                {{item.name}}
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        
-        <div id="modal" class="modal fade" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-              <div class="modal-body">
-                <form class="form-horizontal" @submit="addItem">
-                  <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label">Name</label>
-                    <div class="col-10">
-                      <input type="text" class="form-control" id="name" placeholder="name" v-model="item.name">
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary">OK</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal" v-for="(item, index) in items" @click="editCancel(index)">Отмена</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div> -->
     <script src="js/min/vue-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
